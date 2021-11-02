@@ -9,17 +9,16 @@
         <h3 class="title-message">Todos os pacientes</h3>
     @endif
     @foreach($patients as $patient)
-        <div style="width: 100%"
-            class="<?php
-                if($patient->status == "Sintomas insuficientes" || $patient->status == "Nenhum sintoma foi informado") {
-                    echo "card mb-3 text-white bg-success";
-                } else if($patient->status == "Potencial infectado") {
-                    echo "card mb-3 text-white bg-warning";
-                } else {
-                    echo "card mb-3 text-white bg-danger";
-                }
-            ?>"
-        >
+            <div style="width: 100%"
+                 class="@if($patient->status == "Sintomas insuficientes" || $patient->status == "Nenhum sintoma foi informado") {
+                            card mb-3 text-white bg-success
+                        @elseif($patient->status == "Potencial infectado")
+                            card mb-3 text-white bg-warning
+                        @else
+                            card mb-3 text-white bg-danger"
+                        @endif
+                 ">
+
             <div class="row g-0">
             <div class="col-md-4">
                 <img src="/img/avatars/{{ $patient->avatar }}" class="img-fluid rounded-start" alt="...">

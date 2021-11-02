@@ -89,62 +89,62 @@
                     <div class="checkbox-container">
                         <div class="separator-of-checkbox">
                             <div class="form-check">
-                                <input name="symptoms[]" class="form-check-input" type="checkbox" value="Febre" id="febre">
+                                <input name="symptoms[]" {{ in_array('Febre', $patient->symptoms) ? 'checked' : '' }} class="form-check-input" type="checkbox" value="Febre" id="febre">
                                 <label class="form-check-label" for="febre">Febre</label>
                             </div>
                             <div class="form-check">
-                                <input name="symptoms[]" class="form-check-input" type="checkbox" value="Coriza" id="coriza">
+                                <input name="symptoms[]" {{ in_array('Coriza', $patient->symptoms) ? 'checked' : '' }} class="form-check-input" type="checkbox" value="Coriza" id="coriza">
                                 <label class="form-check-label" for="coriza">Coriza</label>
                             </div>
                             <div class="form-check">
-                                <input name="symptoms[]" class="form-check-input" type="checkbox" value="Nariz entupido" id="nariz-entupido">
+                                <input name="symptoms[]" {{ in_array('Nariz entupido', $patient->symptoms) ? 'checked' : '' }} class="form-check-input" type="checkbox" value="Nariz entupido" id="nariz-entupido">
                                 <label class="form-check-label" for="nariz-entupido">Nariz entupido</label>
                             </div>
                             <div class="form-check">
-                                <input name="symptoms[]" class="form-check-input" type="checkbox" value="Cansaço" id="cansaco">
+                                <input name="symptoms[]" {{ in_array('Cansaço', $patient->symptoms) ? 'checked' : '' }} class="form-check-input" type="checkbox" value="Cansaço" id="cansaco">
                                 <label class="form-check-label" for="cansaco">Cansaço</label>
                             </div>
                             <div class="form-check">
-                                <input name="symptoms[]" class="form-check-input" type="checkbox" value="Tosse" id="tosse">
+                                <input name="symptoms[]" {{ in_array('Tosse', $patient->symptoms) ? 'checked' : '' }} class="form-check-input" type="checkbox" value="Tosse" id="tosse">
                                 <label class="form-check-label" for="tosse">Tosse</label>
                             </div>
                             <div class="form-check">
-                                <input name="symptoms[]" class="form-check-input" type="checkbox" value="Dor de cabeça" id="dor-de-cabeca">
+                                <input name="symptoms[]" {{ in_array('Dor de cabeça', $patient->symptoms) ? 'checked' : '' }} class="form-check-input" type="checkbox" value="Dor de cabeça" id="dor-de-cabeca">
                                 <label class="form-check-label" for="dor-de-cabeca">Dor de cabeça</label>
                             </div>
                             <div class="form-check">
-                                <input name="symptoms[]" class="form-check-input" type="checkbox" value="Dores no corpo" id="dores-no-corpo">
+                                <input name="symptoms[]" {{ in_array('Dores no corpo', $patient->symptoms) ? 'checked' : '' }} class="form-check-input" type="checkbox" value="Dores no corpo" id="dores-no-corpo">
                                 <label class="form-check-label" for="dores-no-corpo">Dores no corpo</label>
                             </div>
                         </div>
 
                         <div class="separator-of-checkbox">
                             <div class="form-check">
-                                <input name="symptoms[]" class="form-check-input" type="checkbox" value="Mal estar geral" id="mal-estar-geral">
+                                <input name="symptoms[]" {{ in_array('Mal estar geral', $patient->symptoms) ? 'checked' : '' }} class="form-check-input" type="checkbox" value="Mal estar geral" id="mal-estar-geral">
                                 <label class="form-check-label" for="mal-estar-geral">Mal estar geral</label>
                             </div>
                             <div class="form-check">
-                                <input name="symptoms[]" class="form-check-input" type="checkbox" value="Dor de garganta" id="dor-de-garganta">
+                                <input name="symptoms[]" {{ in_array('Dor de garganta', $patient->symptoms) ? 'checked' : '' }} class="form-check-input" type="checkbox" value="Dor de garganta" id="dor-de-garganta">
                                 <label class="form-check-label" for="dor-de-garganta">Dor de garganta</label>
                             </div>
                             <div class="form-check">
-                                <input name="symptoms[]" class="form-check-input" type="checkbox" value="Dificuldade de respirar" id="dificuldade-de-respirar">
+                                <input name="symptoms[]" {{ in_array('Dificuldade de respirar', $patient->symptoms) ? 'checked' : '' }} class="form-check-input" type="checkbox" value="Dificuldade de respirar" id="dificuldade-de-respirar">
                                 <label class="form-check-label" for="dificuldade-de-respirar">Dificuldade de respirar</label>
                             </div>
                             <div class="form-check">
-                                <input name="symptoms[]" class="form-check-input" type="checkbox" value="Falta de paladar" id="falta-de-paladar">
+                                <input name="symptoms[]" {{ in_array('Falta de paladar', $patient->symptoms) ? 'checked' : '' }} class="form-check-input" type="checkbox" value="Falta de paladar" id="falta-de-paladar">
                                 <label class="form-check-label" for="falta-de-paladar">Falta de paladar</label>
                             </div>
                             <div class="form-check">
-                                <input name="symptoms[]" class="form-check-input" type="checkbox" value="Falta de olfato" id="falta-de-olfato">
+                                <input name="symptoms[]" {{ in_array('Falta de olfato', $patient->symptoms) ? 'checked' : '' }} class="form-check-input" type="checkbox" value="Falta de olfato" id="falta-de-olfato">
                                 <label class="form-check-label" for="falta-de-olfato">Falta de olfato</label>
                             </div>
                             <div class="form-check">
-                                <input name="symptoms[]" class="form-check-input" type="checkbox" value="Dificuldade de locomoção" id="dificuldade-de-locomocao">
+                                <input name="symptoms[]" {{ in_array('Dificuldade de locomoção', $patient->symptoms) ? 'checked' : '' }} class="form-check-input" type="checkbox" value="Dificuldade de locomoção" id="dificuldade-de-locomocao">
                                 <label class="form-check-label" for="dificuldade-de-locomocao">Dificuldade de locomoção</label>
                             </div>
                             <div class="form-check">
-                                <input name="symptoms[]" class="form-check-input" type="checkbox" value="Diarréia" id="diarreia">
+                                <input name="symptoms[]" {{ in_array('Diarréia', $patient->symptoms) ? 'checked' : '' }} class="form-check-input" type="checkbox" value="Diarréia" id="diarreia">
                                 <label class="form-check-label" for="diarreia">Diarréia</label>
                             </div>
                         </div>
