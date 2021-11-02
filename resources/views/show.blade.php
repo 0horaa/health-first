@@ -60,29 +60,29 @@
                 <div class="mb-3">
                   <label for="name" class="col-form-label">Nome completo:</label>
                   <input type="text" name="name" class="form-control" id="name" onkeypress="handleWithGeneralChecksAtUpdate();" value="{{ $patient->name }}">
-                  <div class="valid-feedback" id="feedback-from-name">Tudo certo!</div>
+                  <div class="valid-feedback" id="feedback-from-name-up">Tudo certo!</div>
                 </div>
                 <div class="mb-3">
                     <label for="social_name" class="col-form-label">Nome social:</label>
                     <input type="text" name="social_name" class="form-control" id="social_name" onkeypress="handleWithGeneralChecksAtUpdate();" value="{{ $patient->social_name }}">
-                    <div class="valid-feedback" id="feedback-from-social-name">Tudo certo!</div>
+                    <div class="valid-feedback" id="feedback-from-social-name-up">Tudo certo!</div>
                 </div>
                 <div class="mb-3">
                     <label for="avatar" class="col-form-label">Foto:</label>
                     <input type="file" name="avatar" class="form-control" id="avatar" accept="image/*">
-                    <div class="valid-feedback" id="feedback-from-avatar">Tudo certo!</div>
+                    <div class="valid-feedback" id="feedback-from-avatar-up">Tudo certo!</div>
                 </div>
                 <div class="mb-3">
                     <label for="age" class="col-form-label">Idade:</label>
                     <input type="number" name="age" class="form-control" id="age" onkeypress="handleWithGeneralChecksAtUpdate();" value="{{ $patient->age }}">
-                    <div class="valid-feedback" id="feedback-from-age">Tudo certo!</div>
+                    <div class="valid-feedback" id="feedback-from-age-up">Tudo certo!</div>
                 </div>
                 <div class="mb-3">
                     <label for="cpf" class="col-form-label">CPF:</label>
                     <input type="text" name="cpf" class="form-control" id="cpf" maxlength="14"
                         onkeypress="addMaskToCpfAtUpdate();" onkeyup="handleWithGeneralChecksAtUpdate();" value="{{ $patient->cpf }}"
                     >
-                    <div class="valid-feedback" id="feedback-from-cpf">Tudo certo!</div>
+                    <div class="valid-feedback" id="feedback-from-cpf-up">Tudo certo!</div>
                 </div>
                 <div class="mb-3">
                     <label class="col-form-label">Sintomas apresentados:</label>

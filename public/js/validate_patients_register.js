@@ -80,7 +80,7 @@ function handleWithGeneralChecks() {
 
 
 function someInputIsEmpty(input) {
-    if(input.length === 0) {
+    if(input.length == 0) {
         return true;
     }
 }
@@ -96,6 +96,21 @@ function inputAgeIsInsufficient(age) {
         return true;
     }
 }
+
+try{
+    document.querySelector("#age").addEventListener("keypress", event => {
+        if(!verifyChar(event)){
+            event.preventDefault();
+        }
+    });
+    function verifyChar(event){
+        var char = String.fromCharCode(event.keyCode);
+        var pattern = '[0-9]';
+        if(char.match(pattern)){
+            return true;
+        }
+    }
+}catch(e){}
 
 function addMaskToCpf(){
     var cpf = form.cpf;

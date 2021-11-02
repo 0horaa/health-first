@@ -1,9 +1,9 @@
 const formUpdate = document.forms["update-patients-form"];
-const feedbackFromNameUpdate = document.querySelector("#feedback-from-name");
-const feedbackFromSocialNameUpdate = document.querySelector("#feedback-from-social-name");
-const feedbackFromAvatarUpdate = document.querySelector("#feedback-from-avatar");
-const feedbackFromAgeUpdate = document.querySelector("#feedback-from-age");
-const feedbackFromCpfUpdate = document.querySelector("#feedback-from-cpf");
+const feedbackFromNameUpdate = document.querySelector("#feedback-from-name-up");
+const feedbackFromSocialNameUpdate = document.querySelector("#feedback-from-social-name-up");
+const feedbackFromAvatarUpdate = document.querySelector("#feedback-from-avatar-up");
+const feedbackFromAgeUpdate = document.querySelector("#feedback-from-age-up");
+const feedbackFromCpfUpdate = document.querySelector("#feedback-from-cpf-up");
 
 function handleWithGeneralChecksAtUpdate() {
     let hasEmptyInput = false;

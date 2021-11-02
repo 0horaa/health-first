@@ -14,7 +14,7 @@ class AddSymptomsToPatientsTable extends Migration
     public function up()
     {
         Schema::table('patients', function (Blueprint $table) {
-            $table->json('symptoms');
+            $table->json('symptoms')->nullable();
         });
     }
 
