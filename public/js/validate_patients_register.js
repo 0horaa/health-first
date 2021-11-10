@@ -1,4 +1,6 @@
 const form = document.forms["create-patients-form"];
+const phone = form.phone;
+const cpf = form.cpf;
 const feedbackFromName = document.querySelector("#feedback-from-name");
 const feedbackFromAvatar = document.querySelector("#feedback-from-avatar");
 const feedbackFromAge = document.querySelector("#feedback-from-age");
@@ -94,13 +96,13 @@ function inputNameIsInsufficient(name) {
 }
 
 function inputAgeIsInsufficient(age) {
-    if(String(age).length > 3) {
+    if(age <= 0 || age > 120) {
         return true;
     }
 }
 
 function inputPhoneIsInsufficient(phone) {
-    if(String(phone).length !== 11) {
+    if(String(phone).length !== 15) {
         return true;
     }
 }
@@ -136,11 +138,26 @@ try{
 }catch(e){}
 
 function addMaskToCpf() {
-    var cpf = form.cpf;
     if(cpf.value.length === 3 || cpf.value.length === 7){
         cpf.value += ".";
     }else if(cpf.value.length === 11){
         cpf.value += "-";
+    }
+}
+
+function addMaskToPhoneOnPress() {
+    if(phone.value.length === 0) {
+        phone.value += "(";
+    } else if(phone.value.length === 10) {
+        phone.value += "-";
+    }
+}
+
+function addMaskToPhoneOnUp() {
+    if(phone.value.length === 3) {
+        phone.value += ")9 ";
+    } else if(phone.value.lenght === 10) {
+        phone.value += "-";
     }
 }
 
@@ -164,4 +181,12 @@ function checkIfCPFIsValid(strCPF) {
     if ((Resto == 10) || (Resto == 11))  Resto = 0;
     if (Resto != parseInt(strCPF.substring(10, 11) ) ) return false;
     return true;
+}
+
+function cleanPhoneField() {
+    phone.value = "";
+}
+
+function cleanCPFField() {
+    cpf.value = "";
 }

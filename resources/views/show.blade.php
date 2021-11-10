@@ -2,6 +2,10 @@
 
 @section('title', $patient->name)
 
+@section('validation-scripts')
+    <script src="/js/validate_patients_update.js"></script>
+@endsection
+
 @section('content')
     <div style="width: 100%"
     class="card mb-8 bg-light"
@@ -71,19 +75,34 @@
                 </div>
                 <div class="mb-3">
                     <label for="avatar" class="col-form-label">Foto:</label>
-                    <input type="file" name="avatar" class="form-control" id="avatar" accept="image/*">
+                    <input type="file" name="avatar" class="form-control" id="avatar" accept=".png,.jpg,.jpeg">
                     <div class="valid-feedback" id="feedback-from-avatar-up">Tudo certo!</div>
                 </div>
                 <div class="mb-3">
                     <label for="age" class="col-form-label">Idade:</label>
-                    <input type="number" name="age" class="form-control" id="age" onkeypress="handleWithGeneralChecksAtUpdate();" value="{{ $patient->age }}">
+                    <input type="number" name="age" class="form-control" id="age"
+                    onkeypress="handleWithGeneralChecksAtUpdate();"
+                    onkeyup="handleWithGeneralChecksAtUpdate();"
+                    value="{{ $patient->age }}"
+                    >
                     <div class="valid-feedback" id="feedback-from-age-up">Tudo certo!</div>
+                </div>
+                <div class="mb-3">
+                    <label for="phone" class="col-form-label">Número:</label>
+                    <input type="text" name="phone" class="form-control" id="phone" maxlength="15"
+                        onkeypress="handleWithGeneralChecks(); addMaskToPhoneOnPressUpdate();"
+                        onkeyup="addMaskToPhoneOnUpUpdate();"
+                        value="{{ $patient->phone }}"
+                    >
+                    <span class="text-secondary" style="cursor: pointer;" onclick="cleanPhoneField();">Limpar</span>
+                    <div class="valid-feedback" id="feedback-from-phone">Tudo certo!</div>
                 </div>
                 <div class="mb-3">
                     <label for="cpf" class="col-form-label">CPF:</label>
                     <input type="text" name="cpf" class="form-control" id="cpf" maxlength="14"
                         onkeypress="addMaskToCpfAtUpdate();" onkeyup="handleWithGeneralChecksAtUpdate();" value="{{ $patient->cpf }}"
                     >
+                    <span class="text-secondary" style="cursor: pointer;" onclick="cleanCPFField();">Limpar</span>
                     <div class="valid-feedback" id="feedback-from-cpf-up">Tudo certo!</div>
                 </div>
                 <div class="mb-3">
@@ -216,5 +235,5 @@
       </div>
     </div>
   </div>
-      <script src="/js/validate_patients_update.js"></script>
+    <script src="/js/validate_patients_update.js"></script>
 @endsection

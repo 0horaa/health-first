@@ -15,9 +15,7 @@ class PatientController extends Controller
         $search = request('search');
 
         if($search) {
-            $patients = Patient::where([
-                ['name', 'like', '%'.$search.'%']
-            ])->get();
+            $patients = Patient::whereRaw("name ilike '%$search%'")->get();
         } else {
             $patients = Patient::all();
         }
@@ -52,8 +50,8 @@ class PatientController extends Controller
         return view('show', ['patient' => $patient]);
     }
 
-    public function update(Request $request) {
-        $data = $request->all();
+    public function update(PatientRequest $request) {
+        $data = $request->validated();
 
         if($request->hasFile('avatar') && $request->file('avatar')->isValid()) {
             $requestAvatar = $request->avatar;

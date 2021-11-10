@@ -45,7 +45,7 @@ class Patient extends Model
     public function getStatusAttribute() {
         $symptoms = $this->attributes['symptoms'];
 
-        if(isset($symptoms) && count(json_decode($symptoms)) <= 5 && count(json_decode($symptoms)) > 0) {
+        if(isset($symptoms) && count(json_decode($symptoms)) <= 5) {
             return "Sintomas insuficientes";
         } else if(isset($symptoms) && count(json_decode($symptoms)) <= 8) {
             return "Potencial infectado";
