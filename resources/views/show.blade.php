@@ -94,7 +94,9 @@
                         onkeyup="addMaskToPhoneOnUpUpdate();"
                         value="{{ $patient->phone }}"
                     >
-                    <span class="text-secondary" style="cursor: pointer;" onclick="cleanPhoneField();">Limpar</span>
+                    <span class="text-secondary" style="cursor: pointer;" onclick="cleanPhoneField();">
+                        Limpar campo
+                    </span>
                     <div class="valid-feedback" id="feedback-from-phone">Tudo certo!</div>
                 </div>
                 <div class="mb-3">
@@ -102,7 +104,9 @@
                     <input type="text" name="cpf" class="form-control" id="cpf" maxlength="14"
                         onkeypress="addMaskToCpfAtUpdate();" onkeyup="handleWithGeneralChecksAtUpdate();" value="{{ $patient->cpf }}"
                     >
-                    <span class="text-secondary" style="cursor: pointer;" onclick="cleanCPFField();">Limpar</span>
+                    <span class="text-secondary" style="cursor: pointer;" onclick="cleanCPFField();">
+                        Limpar campo
+                    </span>
                     <div class="valid-feedback" id="feedback-from-cpf-up">Tudo certo!</div>
                 </div>
                 <div class="mb-3">

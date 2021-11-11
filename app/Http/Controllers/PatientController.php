@@ -3,21 +3,20 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\PatientRequest;
-use Illuminate\Http\Request;
 
 use App\Models\Patient;
 
 class PatientController extends Controller
 {
     public function index() {
-        $patients = Patient::all();
+        $patients = Patient::orderBy('id', 'DESC')->get();
 
         $search = request('search');
 
         if($search) {
-            $patients = Patient::whereRaw("name ilike '%$search%'")->get();
+            $patients = Patient::whereRaw("unaccent(name) ilike unaccent('%{$search}%')")->get();
         } else {
-            $patients = Patient::all();
+            $patients = Patient::orderBy('id', 'DESC')->get();
         }
 
         return view('welcome', ['patients' => $patients, 'search' => $search]);
@@ -27,7 +26,7 @@ class PatientController extends Controller
         $data = $request->validated();
 
         if($request->hasFile('avatar') && $request->file('avatar')->isValid()) {
-            $requestAvatar = $request -> avatar;
+            $requestAvatar = $request->avatar;
 
             $extension = $requestAvatar->extension();
             $avatarName = md5(
@@ -67,7 +66,7 @@ class PatientController extends Controller
         }
 
         if(!isset($data['symptoms'])) {
-            $data['symptoms'] = [];
+            $data['symptoms'] = null;
         }
 
         Patient::findOrFail($request->id)->update($data);

@@ -19,11 +19,12 @@
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-            <form action="/patients" method="POST"
-                    enctype="multipart/form-data"
-                    name="create-patients-form"
-                    id="create-patients-form"
-                    onsubmit="return handleWithGeneralChecks();">
+            <form
+                enctype="multipart/form-data"
+                name="create-patients-form"
+                id="create-patients-form"
+                onsubmit="return handleWithGeneralChecks();"
+            >
                 @csrf
                 <div class="mb-3">
                     <label for="name" class="col-form-label">Nome completo:</label>
@@ -56,7 +57,9 @@
                         onkeypress="handleWithGeneralChecks(); addMaskToPhoneOnPress();"
                         onkeyup="handleWithGeneralChecks(); addMaskToPhoneOnUp();"
                     >
-                    <span class="text-secondary" style="cursor: pointer;" onclick="cleanPhoneField();">Limpar</span>
+                    <span class="text-secondary align-items-to-center" style="cursor: pointer;" onclick="cleanPhoneField();">
+                        Limpar campo
+                    </span>
                     <div class="valid-feedback" id="feedback-from-phone">Tudo certo!</div>
                 </div>
                 <div class="mb-3">
@@ -65,7 +68,9 @@
                         onkeypress="handleWithGeneralChecks(); addMaskToCpf();"
                         onkeyup="handleWithGeneralChecks(); addMaskToCpf();"
                     >
-                    <span class="text-secondary" style="cursor: pointer;" onclick="cleanCPFField();">Limpar</span>
+                    <span class="text-secondary align-items-to-center" style="cursor: pointer;" onclick="cleanCPFField();">
+                        Limpar campo
+                    </span>
                     <div class="valid-feedback" id="feedback-from-cpf">Tudo certo!</div>
                 </div>
                 <div class="mb-3">
@@ -154,16 +159,7 @@
         <h3 class="title-message">Todos os pacientes</h3>
     @endif
     @foreach($patients as $patient)
-        <div style="width: 100%"
-            class="
-                @if($patient->status == "Sintomas insuficientes" || $patient->status ==  "Nenhum sintoma foi informado")
-                    card mb-3 text-white bg-success
-                @elseif($patient->status == "Potencial infectado")
-                    card mb-3 text-white bg-warning
-                @else
-                    card mb-3 text-white bg-danger
-                @endif
-            ">
+        <div style="width: 100%" class="{{ $patient->color }}">
             <div class="row g-0">
             <div class="col-md-4">
                 <img src="/img/avatars/{{ $patient->avatar }}" class="img-fluid rounded-start" alt="...">
