@@ -49,10 +49,6 @@ class PatientController extends Controller
         $store = Patient::create($data);
 
         return $store;
-        // $store['success'] = false;
-        // $store['message'] = 'Paciente cadastrado com sucesso!';
-
-        // echo json_encode($store);
 
         // return redirect('/')->with('msg', 'Paciente cadastrado com sucesso!');
     }
