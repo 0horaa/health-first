@@ -9,17 +9,21 @@ use App\Models\Patient;
 class PatientController extends Controller
 {
     public function index() {
-        $patients = Patient::orderBy('id', 'DESC')->get();
+        // $patients = Patient::orderBy('id', 'DESC')->get();
 
-        $search = request('search');
+        // $search = request('search');
 
-        if($search) {
-            $patients = Patient::whereRaw("unaccent(name) ilike unaccent('%{$search}%')")->get();
-        } else {
-            $patients = Patient::orderBy('id', 'DESC')->get();
-        }
+        // if($search) {
+        //     $patients = Patient::whereRaw("unaccent(name) ilike unaccent('%{$search}%')")->get();
+        // } else {
+        //     $patients = Patient::orderBy('id', 'DESC')->get();
+        // }
 
-        return view('welcome', ['patients' => $patients, 'search' => $search]);
+        return view('welcome');
+    }
+
+    public function patientsData() {
+        return Patient::orderBy('id', 'DESC')->get();
     }
 
     public function store(PatientRequest $request) {
@@ -38,9 +42,19 @@ class PatientController extends Controller
             $data['avatar'] = $avatarName;
         }
 
-        Patient::create($data);
+        if(!isset($data['symptoms'])) {
+            $data['symptoms'] = null;
+        }
 
-        return redirect('/')->with('msg', 'Paciente cadastrado com sucesso!');
+        $store = Patient::create($data);
+
+        return $store;
+        // $store['success'] = false;
+        // $store['message'] = 'Paciente cadastrado com sucesso!';
+
+        // echo json_encode($store);
+
+        // return redirect('/')->with('msg', 'Paciente cadastrado com sucesso!');
     }
 
     public function show($id) {

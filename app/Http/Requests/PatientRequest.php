@@ -42,6 +42,7 @@ class PatientRequest extends FormRequest
             '*.min' => 'Não foi possível fazer o registro do paciente. Por favor, preencha todos os campos com os caracteres mínimos.',
             '*.max' => 'Não foi possível fazer o registro do paciente. Por favor, preencha todos os campos com os caracteres máximos.',
             '*.mimes' => 'Não foi possível fazer o registro do paciente. Por favor, selecione uma imagem válida para definir o avatar.',
+            '*.unique' => 'Não foi possível fazer o registro do paciente. Este CPF já está em uso.',
             'cpf.cpf' => 'Não foi possível fazer o registro do paciente. Por favor, insira um CPF válido.',
         ];
     }

@@ -31,16 +31,23 @@
                     <input type="text" name="name" class="form-control" id="name"
                     onkeypress="handleWithGeneralChecks();"
                     onkeyup="handleWithGeneralChecks();"
+                    autocomplete="nope"
                     >
                     <div class="valid-feedback" id="feedback-from-name">Tudo certo!</div>
                 </div>
                 <div class="mb-3">
                     <label for="social_name" class="col-form-label">Nome social (opcional):</label>
-                    <input type="text" name="social_name" class="form-control" id="social_name" onkeypress="handleWithGeneralChecks();">
+                    <input type="text" name="social_name" class="form-control" id="social_name"
+                    onkeypress="handleWithGeneralChecks();"
+                    autocomplete="nope"
+                    >
                 </div>
                 <div class="mb-3">
                     <label for="avatar" class="col-form-label">Foto:</label>
-                    <input type="file" name="avatar" class="form-control" id="avatar" accept=".png,.jpg,.jpeg" onchange="handleWithGeneralChecks();">
+                    <input type="file" name="avatar" class="form-control" id="avatar" accept=".png,.jpg,.jpeg"
+                    onchange="handleWithGeneralChecks();"
+                    autocomplete="nope"
+                    >
                     <div class="valid-feedback" id="feedback-from-avatar">Tudo certo!</div>
                 </div>
                 <div class="mb-3">
@@ -48,6 +55,7 @@
                     <input type="number" name="age" class="form-control" id="age"
                     onkeypress="handleWithGeneralChecks();"
                     onkeyup="handleWithGeneralChecks();"
+                    autocomplete="nope"
                     >
                     <div class="valid-feedback" id="feedback-from-age">Tudo certo!</div>
                 </div>
@@ -56,6 +64,7 @@
                     <input type="text" name="phone" class="form-control" id="phone" maxlength="15"
                         onkeypress="handleWithGeneralChecks(); addMaskToPhoneOnPress();"
                         onkeyup="handleWithGeneralChecks(); addMaskToPhoneOnUp();"
+                        autocomplete="nope"
                     >
                     <span class="text-secondary align-items-to-center" style="cursor: pointer;" onclick="cleanPhoneField();">
                         Limpar campo
@@ -67,6 +76,7 @@
                     <input type="text" name="cpf" class="form-control" id="cpf" maxlength="14"
                         onkeypress="handleWithGeneralChecks(); addMaskToCpf();"
                         onkeyup="handleWithGeneralChecks(); addMaskToCpf();"
+                        autocomplete="nope"
                     >
                     <span class="text-secondary align-items-to-center" style="cursor: pointer;" onclick="cleanCPFField();">
                         Limpar campo
@@ -141,7 +151,7 @@
                 </div>
                 <div class="mb-3">
                 <label for="observation" class="col-form-label">Observações (opcional):</label>
-                <textarea name="observation" class="form-control" id="observation"></textarea>
+                <textarea name="observation" class="form-control" id="observation" autocomplete="nope"></textarea>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Fechar</button>
@@ -153,37 +163,11 @@
         </div>
     </div>
 
-    @if($search)
-        <h3 class="title-message">Buscando por: {{ $search }}</h3>
-    @else
-        <h3 class="title-message">Todos os pacientes</h3>
-    @endif
-    @foreach($patients as $patient)
-        <div style="width: 100%" class="{{ $patient->color }}">
-            <div class="row g-0">
-            <div class="col-md-4">
-                <img src="/img/avatars/{{ $patient->avatar }}" class="img-fluid rounded-start" alt="...">
-            </div>
-            <div class="col-md-8">
-                <div class="card-body">
-                    <h5 class="card-title align-items-to-center"><ion-icon name="person"></ion-icon>
-                        {{ $patient->getRawOriginal('name')}}
-                        @if($patient->social_name)
-                            (Nome social: {{ $patient->social_name }})
-                        @endif
-                    </h5>
-                    <p class="card-text align-items-to-center"><ion-icon name="medkit"></ion-icon> Condição: {{ $patient->status }}.</p>
-                    <p class="card-text align-items-to-center"><ion-icon name="id-card"></ion-icon> CPF: {{ $patient->cpf }}</p>
-                    <p class="card-text align-items-to-center"><ion-icon name="today"></ion-icon> Idade: {{ $patient->age }} anos</p>
-                    <a href="/patients/{{ $patient->id }}" class="btn btn-light">Ver mais</a>
-                </div>
-            </div>
+    <div id="main">
+        <div class="d-flex justify-content-center">
+            <div class="spinner-border d-none" role="status" id="spinner">
+                <span class="visually-hidden">Loading...</span>
             </div>
         </div>
-    @endforeach
-    @if(count($patients) === 0 && $search)
-        <h3 class="align-items-to-center title-message"><ion-icon name="sad" size="large"></ion-icon> Nenhum resultado foi encontrado para a pesquisa: {{ $search }}</h3>
-    @elseif(count($patients) === 0)
-    <h3 class="align-items-to-center title-message"><ion-icon name="sad" size="large"></ion-icon> Você ainda não cadastrou nenhum paciente...</h3>
-    @endif
+    </div>
 @endsection
