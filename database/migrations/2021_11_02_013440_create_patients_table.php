@@ -20,7 +20,6 @@ class CreatePatientsTable extends Migration
             $table->string('avatar');
             $table->integer('age');
             $table->string('cpf');
-            $table->string('status');
             $table->text('observation')->nullable();
         });
     }
