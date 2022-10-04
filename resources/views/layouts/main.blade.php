@@ -73,103 +73,94 @@
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.3.0/jquery.form.min.js" integrity="sha384-qlmct0AOBiA2VPZkMY3+2WqkHtIQ9lSdAsAn5RUJD/3vA5MKDgSGcdmIv4ycVxyn" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
     <script>
+        let data = ""
+
         //POST - rota store
         $(function() {
-            $('form[name="create-patients-form"]').submit(function(event) {
+            $('form[name="create-patients-form"]').submit(async function(event) {
                 event.preventDefault();
 
                 var formData = new FormData(this);
 
-                $.ajax({
-                    url: "{{ route('patients.create') }}",
-                    type: "post",
-                    data: formData,
-                    dataType: "json",
-                    contentType: false,
-                    cache: false,
-                    processData: false
-                }).done(function(response) {
-                    $('#create-users-modal').modal('hide');
-                    let fetchResult = `
-                            <div style="width: 100%" class="${response['color']}">
-                                <div class="row g-0">
-                                    <div class="col-md-4">
-                                        <img src="/img/avatars/${response['avatar']}" class="img-fluid rounded-start" alt="...">
-                                    </div>
-                                    <div class="col-md-8">
-                                        <div class="card-body">
-                                            <h5 class="card-title align-items-to-center"><ion-icon name="person"></ion-icon>
-                                                ${response['name']}
-                                            </h5>
-                                            <p class="card-text align-items-to-center"><ion-icon name="medkit"></ion-icon> Condição: ${response['status']}.</p>
-                                            <p class="card-text align-items-to-center"><ion-icon name="id-card"></ion-icon> CPF: ${response['cpf']}</p>
-                                            <p class="card-text align-items-to-center"><ion-icon name="today"></ion-icon> Idade: ${response['age']} anos</p>
-                                            <a href="/patients/${response['id']}" class="btn btn-light">Ver mais</a>
-                                        </div>
+                const response = await axios.post("{{ route('patients.create') }}", formData)
+                data = response.data
+
+                $('#create-users-modal').modal('hide');
+                let fetchResult = `
+                        <div style="width: 100%" class="${data['color']}">
+                            <div class="row g-0">
+                                <div class="col-md-4">
+                                    <img src="/img/avatars/${data['avatar']}" class="img-fluid rounded-start" alt="...">
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="card-body">
+                                        <h5 class="card-title align-items-to-center"><ion-icon name="person"></ion-icon>
+                                            ${data['name']}
+                                        </h5>
+                                        <p class="card-text align-items-to-center"><ion-icon name="medkit"></ion-icon> Condição: ${data['status']}.</p>
+                                        <p class="card-text align-items-to-center"><ion-icon name="id-card"></ion-icon> CPF: ${data['cpf']}</p>
+                                        <p class="card-text align-items-to-center"><ion-icon name="today"></ion-icon> Idade: ${data['age']} anos</p>
+                                        <a href="/patients/${data['id']}" class="btn btn-light">Ver mais</a>
                                     </div>
                                 </div>
                             </div>
-                    `;
-                    $('#main').prepend(fetchResult);
-                    $('#alert-container').innerHTML = `
-                        <div class="alert alert-success" role="alert">
-                            Paciente cadastrado com sucesso!
                         </div>
-                    `;
-                });
+                `;
+                $('#main').prepend(fetchResult);
+                $('#alert-container').innerHTML = `
+                    <div class="alert alert-success" role="alert">
+                        Paciente cadastrado com sucesso!
+                    </div>
+                `;
             });
         });
 
         //GET - pega dados da rota que retorna os dado
         $(function() {
-            $(document).ready(function() {
+            $(document).ready(async function() {
                 let fetchResult = '';
 
-                $.ajax({
-                    url: "{{ route('patients.data') }}",
-                    type: "get",
-                    contentType: false,
-                    cache: false,
-                    processData: false,
-                    beforeSend: function() {
-                        $('#spinner').removeClass('d-none');
+                $('#spinner').removeClass('d-none')
+
+                const response = await axios.get("{{ route('patients.data') }}")
+
+                data = response.data
+
+                for(let i = 0; i < data.length; i++) {
+                    let socialNameField = '';
+
+                    if(data[i]['social_name']) {
+                        socialNameField = `
+                            (Nome social: ${data[i]['social_name']})
+                        `;
                     }
-                }).done(function(response) {
-                    for(let i = 0; i < response.length; i++) {
-                        let socialNameField = '';
 
-                        if(response[i]['social_name']) {
-                            socialNameField = `
-                                (Nome social: ${response[i]['social_name']})
-                            `;
-                        }
-
-                        fetchResult += `
-                            <div style="width: 100%" class="${response[i]['color']}">
-                                <div class="row g-0">
-                                    <div class="col-md-4">
-                                        <img src="/img/avatars/${response[i]['avatar']}" class="img-fluid rounded-start" alt="...">
-                                    </div>
-                                    <div class="col-md-8">
-                                        <div class="card-body">
-                                            <h5 class="card-title align-items-to-center"><ion-icon name="person"></ion-icon>
-                                                ${response[i]['name']}
-                                            </h5>
-                                            <p class="card-text align-items-to-center"><ion-icon name="medkit"></ion-icon> Condição: ${response[i]['status']}.</p>
-                                            <p class="card-text align-items-to-center"><ion-icon name="id-card"></ion-icon> CPF: ${response[i]['cpf']}</p>
-                                            <p class="card-text align-items-to-center"><ion-icon name="today"></ion-icon> Idade: ${response[i]['age']} anos</p>
-                                            <a href="/patients/${response[i]['id']}" class="btn btn-light">Ver mais</a>
-                                        </div>
+                    fetchResult += `
+                        <div style="width: 100%" class="${data[i]['color']}">
+                            <div class="row g-0">
+                                <div class="col-md-4">
+                                    <img src="/img/avatars/${data[i]['avatar']}" class="img-fluid rounded-start" alt="...">
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="card-body">
+                                        <h5 class="card-title align-items-to-center"><ion-icon name="person"></ion-icon>
+                                            ${data[i]['name']}
+                                        </h5>
+                                        <p class="card-text align-items-to-center"><ion-icon name="medkit"></ion-icon> Condição: ${data[i]['status']}.</p>
+                                        <p class="card-text align-items-to-center"><ion-icon name="id-card"></ion-icon> CPF: ${data[i]['cpf']}</p>
+                                        <p class="card-text align-items-to-center"><ion-icon name="today"></ion-icon> Idade: ${data[i]['age']} anos</p>
+                                        <a href="/patients/${data[i]['id']}" class="btn btn-light">Ver mais</a>
                                     </div>
                                 </div>
                             </div>
-                        `;
-                        }
-                    $('#main').append(fetchResult);
-                    $('#spinner').addClass('d-none');
-                });
+                        </div>
+                    `;
+                    }
+                $('#main').append(fetchResult);
+                $('#spinner').addClass('d-none');
             });
         });
     </script>
