@@ -85,8 +85,7 @@
 
                 var formData = new FormData(this);
 
-                const response = await axios.post("{{ route('patients.create') }}", formData)
-                data = response.data
+                const { data } = await axios.post("{{ route('patients.create') }}", formData)
 
                 $('#create-users-modal').modal('hide');
                 let fetchResult = `
