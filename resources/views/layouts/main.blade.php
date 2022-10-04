@@ -125,9 +125,7 @@
 
                 $('#spinner').removeClass('d-none')
 
-                const response = await axios.get("{{ route('patients.data') }}")
-
-                data = response.data
+                const { data } = await axios.get("{{ route('patients.data') }}")
 
                 for(let i = 0; i < data.length; i++) {
                     let socialNameField = '';
